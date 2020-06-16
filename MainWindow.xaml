@@ -1,0 +1,20 @@
+﻿<Window x:Class="Authorization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Authorization"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="500">
+    <Grid>
+        <Label Content="Авторизация" HorizontalAlignment="Center" Height="110" Margin="0,10,0,0" VerticalAlignment="Top" Width="420" FontSize="72" FontWeight="Normal" FontFamily="Segoe UI Light" Foreground="Black"/>
+        <TextBlock x:Name="label_Login" Text="Логин" HorizontalAlignment="Left" Margin="40,146,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox x:Name="input_Login" HorizontalAlignment="Center" Margin="0,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" FontSize="18"/>
+        <TextBlock x:Name="label_Password" Text="Пароль" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="18"/>
+        <PasswordBox x:Name="input_Password" HorizontalAlignment="Center" Margin="0,234,0,0" VerticalAlignment="Top" Width="420" FontSize="18"/>
+        <Button x:Name="button_Authorization" Content="Отправить" HorizontalAlignment="Left" Margin="40,288,0,0" VerticalAlignment="Top" FontSize="18" BorderBrush="Black" Background="{x:Null}" Width="130" Click="button_Authorization_Click"/>
+        <Button x:Name="button_Clear" Content="Очистить" HorizontalAlignment="Center" Margin="0,288,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130" Click="button_Clear_Click"/>
+        <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="330,288,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130" Click="button_Cancel_Click"/>
+
+    </Grid>
+</Window>
