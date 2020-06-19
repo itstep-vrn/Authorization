@@ -20,6 +20,9 @@ namespace Authorization
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string login = "login";
+        private string password = "123";
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +30,16 @@ namespace Authorization
 
         private void button_Authorization_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
+            if (input_Login.Text == login && input_Password.Password == password)
+            {
+                MessageBox.Show("Авторизация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Вы ввели неверный логин или пароль.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                input_Login.Clear();
+                input_Password.Clear();
+            }
         }
 
         private void button_Clear_Click(object sender, RoutedEventArgs e)
@@ -43,6 +55,18 @@ namespace Authorization
             {
                 Close();
             }
+        }
+
+        private void hyper_SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            SignUp signUp = new SignUp();
+            signUp.Show();
+            Close();
+        }
+
+        private void hyper_RestorePassword_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
