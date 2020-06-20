@@ -7,14 +7,34 @@
         mc:Ignorable="d"
         Title="Авторизация" Height="450" Width="500" ResizeMode="NoResize">
     <Grid>
+        <Border Width="auto" Height="auto" BorderBrush="LimeGreen" BorderThickness="2"
+                CornerRadius="0,30,0,30">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="#e7ebf7" Offset="0.0"></GradientStop>
+                            <GradientStop Color="#cee3ff" Offset="0.5"></GradientStop>
+                        </GradientStopCollection>
+                    </GradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+        </Border>
         <Label Content="Авторизация" HorizontalAlignment="Center" Height="110" Margin="0,10,0,0" VerticalAlignment="Top" Width="420" FontSize="72" FontWeight="Normal" FontFamily="Segoe UI Light" Foreground="Black"/>
         <TextBlock x:Name="label_Login" Text="Логин" HorizontalAlignment="Left" Margin="40,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
         <TextBox x:Name="input_Login" HorizontalAlignment="Center" Margin="0,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" FontSize="18"/>
         <TextBlock x:Name="label_Password" Text="Пароль" HorizontalAlignment="Left" Margin="40,228,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
         <PasswordBox x:Name="input_Password" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Width="420" FontSize="18"/>
-        <Button x:Name="button_Authorization" Content="Отправить" HorizontalAlignment="Left" Margin="40,317,0,0" VerticalAlignment="Top" FontSize="18" BorderBrush="Black" Background="{x:Null}" Width="130" Click="button_Authorization_Click"/>
-        <Button x:Name="button_Clear" Content="Очистить" HorizontalAlignment="Center" Margin="0,317,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130" Click="button_Clear_Click"/>
-        <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="330,317,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130" Click="button_Cancel_Click"/>
+        <Button x:Name="button_Authorization" Content="Авторизоваться" HorizontalAlignment="Left" Margin="40,317,0,0" VerticalAlignment="Top" FontSize="16" BorderBrush="Black" Background="{x:Null}" Width="130" Click="button_Authorization_Click"/>
+        <Button x:Name="button_Clear" Content="Очистить" HorizontalAlignment="Left" Margin="259,317,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="110" Click="button_Clear_Click"/>
+        <Button x:Name="button_Cancel" Content="Отмена" HorizontalAlignment="Left" Margin="374,317,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="86" Click="button_Cancel_Click"/>
         <TextBlock x:Name="label_RestorePassword" HorizontalAlignment="Left" Margin="315,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" Width="145" TextAlignment="Right" Visibility="Visible">
             <Hyperlink x:Name="hyper_RestorePassword" Click="hyper_RestorePassword_Click">Забыли пароль</Hyperlink>
         </TextBlock>
