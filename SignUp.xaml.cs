@@ -25,20 +25,7 @@ namespace Authorization
 
         private void button_SignUp_Click(object sender, RoutedEventArgs e)
         {
-            PasswordCheck.PasswordCheck passwordCheck = new PasswordCheck.PasswordCheck();
-
-            passwordCheck.Error += ErrorMessage;
-            //passwordCheck.Success += SuccessMessage;
-
-            string password = input_Password.Password;
-            bool checkLength = passwordCheck.CheckLength(password);
-            bool checkSymbol = passwordCheck.CheckSymbol(password);
-            bool checkAlphabet = passwordCheck.CheckAlphabet(password);
-
-            if (checkLength && checkSymbol && checkAlphabet)
-            {
-                SuccessMessage("Всё OK");
-            }
+            
         }
 
         private void button_Clear_Click(object sender, RoutedEventArgs e)
@@ -58,19 +45,91 @@ namespace Authorization
 
         private void input_Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            //PasswordCheck passwordCheck = new PasswordCheck();
             PasswordCheck.PasswordCheck passwordCheck = new PasswordCheck.PasswordCheck();
-            
+            string password = input_Password.Password;
+
+            passwordCheck.Error += MessageLabel_CheckLength_Error;
+            passwordCheck.Success += MessageLabel_CheckLength_Success;
+            bool checkLength = passwordCheck.CheckLength(password);
+            passwordCheck.Error -= MessageLabel_CheckLength_Error;
+            passwordCheck.Success -= MessageLabel_CheckLength_Success;
+
+            passwordCheck.Error += MessageLabel_CheckSymbols_Error;
+            passwordCheck.Success += MessageLabel_CheckSymbols_Success;
+            bool checkSymbols = passwordCheck.CheckSymbol(password);
+            passwordCheck.Error -= MessageLabel_CheckSymbols_Error;
+            passwordCheck.Success -= MessageLabel_CheckSymbols_Success;
+
+            passwordCheck.Error += MessageLabel_CheckAlphabet_Error;
+            passwordCheck.Success += MessageLabel_CheckAlphabet_Success;
+            bool checkAlphabet = passwordCheck.CheckAlphabet(password);
+            passwordCheck.Error -= MessageLabel_CheckAlphabet_Error;
+            passwordCheck.Success -= MessageLabel_CheckAlphabet_Success;
+
+            if (checkLength && checkSymbols && checkAlphabet)
+            {
+                input_RepeatPassword.IsEnabled = true;
+            }
+            else
+            {
+                input_RepeatPassword.IsEnabled = false;
+            }
         }
 
-        private void ErrorMessage(string message)
+        private void MessageLabel_CheckLength_Error(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            label_PasswordCheck_Length.Foreground = Brushes.Red;
+            label_PasswordCheck_Length.Text = message;
+        }
+        private void MessageLabel_CheckLength_Success(string message)
+        {
+            label_PasswordCheck_Length.Foreground = Brushes.Green;
+            label_PasswordCheck_Length.Text = message;
         }
 
-        private void SuccessMessage(string message)
+        private void MessageLabel_CheckSymbols_Error(string message)
         {
-            MessageBox.Show(message, "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            label_PasswordCheck_Symbols.Foreground = Brushes.Red;
+            label_PasswordCheck_Symbols.Text = message;
+        }
+        private void MessageLabel_CheckSymbols_Success(string message)
+        {
+            label_PasswordCheck_Symbols.Foreground = Brushes.Green;
+            label_PasswordCheck_Symbols.Text = message;
+        }
+
+        private void MessageLabel_CheckAlphabet_Error(string message)
+        {
+            label_PasswordCheck_Alphabet.Foreground = Brushes.Red;
+            label_PasswordCheck_Alphabet.Text = message;
+        }
+        private void MessageLabel_CheckAlphabet_Success(string message)
+        {
+            label_PasswordCheck_Alphabet.Foreground = Brushes.Green;
+            label_PasswordCheck_Alphabet.Text = message;
+        }
+
+        private void input_RepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            string password = input_Password.Password;
+            string passwordRepeat = input_RepeatPassword.Password;
+
+            if (passwordRepeat == "")
+            {
+                label_Password_CheckRepeat.Text = "";
+            }
+            else if (password == passwordRepeat)
+            {
+                label_Password_CheckRepeat.Foreground = Brushes.Green;
+                label_Password_CheckRepeat.Text = "Пароли совпадают";
+                button_SignUp.IsEnabled = true;
+            }
+            else
+            {
+                label_Password_CheckRepeat.Foreground = Brushes.Red;
+                label_Password_CheckRepeat.Text = "Пароли не совпадают";
+                button_SignUp.IsEnabled = false;
+            }
         }
     }
 }
