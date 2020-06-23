@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using PasswordCheck;
+using static Logging.LogToFile;
 
 namespace Authorization
 {
-    /// <summary>
-    /// Логика взаимодействия для SignUp.xaml
-    /// </summary>
     public partial class SignUp : Window
     {
         public SignUp()
         {
             InitializeComponent();
+            Loaded += (sender, args) => Log("info.log", "INFO", "Окно регистрации загружено");
+            Closed += (sender, args) => Log("info.log", "INFO", "Окно регистрации закрылось");
         }
 
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
@@ -47,6 +38,9 @@ namespace Authorization
         {
             var passwordCheck = new PasswordCheck.PasswordCheck();
             var password = InputPassword.Password;
+
+            passwordCheck.Error += ErrorLog;
+            passwordCheck.Success += SuccessLog;
 
             passwordCheck.Error += MessageLabel_CheckLength_Error;
             passwordCheck.Success += MessageLabel_CheckLength_Success;
@@ -109,6 +103,16 @@ namespace Authorization
             LabelPasswordCheckAlphabet.Text = message;
         }
 
+        private void ErrorLog(string message)
+        {
+            Log("error.log", "ERROR", message);
+        }
+
+        private void SuccessLog(string message)
+        {
+            Log("success.log", "SUCCESS", message);
+        }
+        
         private void InputRepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             string password = InputPassword.Password;

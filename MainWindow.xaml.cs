@@ -1,19 +1,20 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using static Logging.LogToFile;
 
 namespace Authorization
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        //TODO Значение переменных из БД
         private string login = "login";
         private string password = "123";
         
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += (sender, args) => Log("info.log", "INFO", "Окно авторизации загружено");
+            Closed += (sender, args) => Log("info.log", "INFO", "Окно авторизации закрылось");
         }
 
         private void ButtonAuthorization_Click(object sender, RoutedEventArgs e)

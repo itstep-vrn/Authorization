@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>Logging.dll</HintPath>
+    </Reference>
     <Reference Include="PasswordCheck">
       <HintPath>PasswordCheck.dll</HintPath>
     </Reference>
