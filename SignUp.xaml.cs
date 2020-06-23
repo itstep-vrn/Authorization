@@ -25,7 +25,7 @@ namespace Authorization
 
         private void button_SignUp_Click(object sender, RoutedEventArgs e)
         {
-            
+            //TODO Connect to DB
         }
 
         private void button_Clear_Click(object sender, RoutedEventArgs e)
@@ -45,24 +45,24 @@ namespace Authorization
 
         private void input_Password_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            PasswordCheck.PasswordCheck passwordCheck = new PasswordCheck.PasswordCheck();
-            string password = input_Password.Password;
+            var passwordCheck = new PasswordCheck.PasswordCheck();
+            var password = input_Password.Password;
 
             passwordCheck.Error += MessageLabel_CheckLength_Error;
             passwordCheck.Success += MessageLabel_CheckLength_Success;
-            bool checkLength = passwordCheck.CheckLength(password);
+            var checkLength = passwordCheck.CheckLength(password);
             passwordCheck.Error -= MessageLabel_CheckLength_Error;
             passwordCheck.Success -= MessageLabel_CheckLength_Success;
 
             passwordCheck.Error += MessageLabel_CheckSymbols_Error;
             passwordCheck.Success += MessageLabel_CheckSymbols_Success;
-            bool checkSymbols = passwordCheck.CheckSymbol(password);
+            var checkSymbols = passwordCheck.CheckSymbol(password);
             passwordCheck.Error -= MessageLabel_CheckSymbols_Error;
             passwordCheck.Success -= MessageLabel_CheckSymbols_Success;
 
             passwordCheck.Error += MessageLabel_CheckAlphabet_Error;
             passwordCheck.Success += MessageLabel_CheckAlphabet_Success;
-            bool checkAlphabet = passwordCheck.CheckAlphabet(password);
+            var checkAlphabet = passwordCheck.CheckAlphabet(password);
             passwordCheck.Error -= MessageLabel_CheckAlphabet_Error;
             passwordCheck.Success -= MessageLabel_CheckAlphabet_Success;
 
@@ -130,6 +130,11 @@ namespace Authorization
                 label_Password_CheckRepeat.Text = "Пароли не совпадают";
                 button_SignUp.IsEnabled = false;
             }
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
