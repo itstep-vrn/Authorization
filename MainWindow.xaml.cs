@@ -16,27 +16,27 @@ namespace Authorization
             InitializeComponent();
         }
 
-        private void button_Authorization_Click(object sender, RoutedEventArgs e)
+        private void ButtonAuthorization_Click(object sender, RoutedEventArgs e)
         {
-            if (input_Login.Text == login && input_Password.Password == password)
+            if (InputLogin.Text == login && InputPassword.Password == password)
             {
                 MessageBox.Show("Авторизация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 MessageBox.Show("Вы ввели неверный логин или пароль.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                input_Login.Clear();
-                input_Password.Clear();
+                InputLogin.Clear();
+                InputPassword.Clear();
             }
         }
 
-        private void button_Clear_Click(object sender, RoutedEventArgs e)
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            input_Login.Clear();
-            input_Password.Clear();
+            InputLogin.Clear();
+            InputPassword.Clear();
         }
 
-        private void button_Cancel_Click(object sender, RoutedEventArgs e)
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             var res = MessageBox.Show("Вы уверены, что хотите закрыть окно авторизации?", "Подтвердите действие", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
@@ -45,14 +45,14 @@ namespace Authorization
             }
         }
 
-        private void hyper_SignUp_Click(object sender, RoutedEventArgs e)
+        private void HyperSignUp_Click(object sender, RoutedEventArgs e)
         {
             var signUp = new SignUp();
             signUp.Show();
             Close();
         }
 
-        private void hyper_RestorePassword_Click(object sender, RoutedEventArgs e)
+        private void HyperRestorePassword_Click(object sender, RoutedEventArgs e)
         {
             //TODO
         }

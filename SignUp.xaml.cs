@@ -23,18 +23,18 @@ namespace Authorization
             InitializeComponent();
         }
 
-        private void button_SignUp_Click(object sender, RoutedEventArgs e)
+        private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
             //TODO Connect to DB
         }
 
-        private void button_Clear_Click(object sender, RoutedEventArgs e)
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
-            input_Login.Clear();
-            input_Password.Clear();
+            InputLogin.Clear();
+            InputPassword.Clear();
         }
 
-        private void button_Cancel_Click(object sender, RoutedEventArgs e)
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             var res = MessageBox.Show("Вы уверены, что хотите закрыть окно авторизации?", "Подтвердите действие", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (res == MessageBoxResult.Yes)
@@ -43,10 +43,10 @@ namespace Authorization
             }
         }
 
-        private void input_Password_PasswordChanged(object sender, RoutedEventArgs e)
+        private void InputPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             var passwordCheck = new PasswordCheck.PasswordCheck();
-            var password = input_Password.Password;
+            var password = InputPassword.Password;
 
             passwordCheck.Error += MessageLabel_CheckLength_Error;
             passwordCheck.Success += MessageLabel_CheckLength_Success;
@@ -68,67 +68,67 @@ namespace Authorization
 
             if (checkLength && checkSymbols && checkAlphabet)
             {
-                input_RepeatPassword.IsEnabled = true;
+                InputRepeatPassword.IsEnabled = true;
             }
             else
             {
-                input_RepeatPassword.IsEnabled = false;
+                InputRepeatPassword.IsEnabled = false;
             }
         }
 
         private void MessageLabel_CheckLength_Error(string message)
         {
-            label_PasswordCheck_Length.Foreground = Brushes.Red;
-            label_PasswordCheck_Length.Text = message;
+            LabelPasswordCheckLength.Foreground = Brushes.Red;
+            LabelPasswordCheckLength.Text = message;
         }
         private void MessageLabel_CheckLength_Success(string message)
         {
-            label_PasswordCheck_Length.Foreground = Brushes.Green;
-            label_PasswordCheck_Length.Text = message;
+            LabelPasswordCheckLength.Foreground = Brushes.Green;
+            LabelPasswordCheckLength.Text = message;
         }
 
         private void MessageLabel_CheckSymbols_Error(string message)
         {
-            label_PasswordCheck_Symbols.Foreground = Brushes.Red;
-            label_PasswordCheck_Symbols.Text = message;
+            LabelPasswordCheckSymbols.Foreground = Brushes.Red;
+            LabelPasswordCheckSymbols.Text = message;
         }
         private void MessageLabel_CheckSymbols_Success(string message)
         {
-            label_PasswordCheck_Symbols.Foreground = Brushes.Green;
-            label_PasswordCheck_Symbols.Text = message;
+            LabelPasswordCheckSymbols.Foreground = Brushes.Green;
+            LabelPasswordCheckSymbols.Text = message;
         }
 
         private void MessageLabel_CheckAlphabet_Error(string message)
         {
-            label_PasswordCheck_Alphabet.Foreground = Brushes.Red;
-            label_PasswordCheck_Alphabet.Text = message;
+            LabelPasswordCheckAlphabet.Foreground = Brushes.Red;
+            LabelPasswordCheckAlphabet.Text = message;
         }
         private void MessageLabel_CheckAlphabet_Success(string message)
         {
-            label_PasswordCheck_Alphabet.Foreground = Brushes.Green;
-            label_PasswordCheck_Alphabet.Text = message;
+            LabelPasswordCheckAlphabet.Foreground = Brushes.Green;
+            LabelPasswordCheckAlphabet.Text = message;
         }
 
-        private void input_RepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void InputRepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            string password = input_Password.Password;
-            string passwordRepeat = input_RepeatPassword.Password;
+            string password = InputPassword.Password;
+            string passwordRepeat = InputRepeatPassword.Password;
 
             if (passwordRepeat == "")
             {
-                label_Password_CheckRepeat.Text = "";
+                LabelPasswordCheckRepeat.Text = "";
             }
             else if (password == passwordRepeat)
             {
-                label_Password_CheckRepeat.Foreground = Brushes.Green;
-                label_Password_CheckRepeat.Text = "Пароли совпадают";
-                button_SignUp.IsEnabled = true;
+                LabelPasswordCheckRepeat.Foreground = Brushes.Green;
+                LabelPasswordCheckRepeat.Text = "Пароли совпадают";
+                ButtonSignUp.IsEnabled = true;
             }
             else
             {
-                label_Password_CheckRepeat.Foreground = Brushes.Red;
-                label_Password_CheckRepeat.Text = "Пароли не совпадают";
-                button_SignUp.IsEnabled = false;
+                LabelPasswordCheckRepeat.Foreground = Brushes.Red;
+                LabelPasswordCheckRepeat.Text = "Пароли не совпадают";
+                ButtonSignUp.IsEnabled = false;
             }
         }
 
