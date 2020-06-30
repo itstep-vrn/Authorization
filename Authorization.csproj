@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -9,7 +9,7 @@
   <ItemGroup>
     <Reference Include="Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>Logging.dll</HintPath>
-    </Reference>
+    </Reference>    
     <Reference Include="PasswordCheck">
       <HintPath>PasswordCheck.dll</HintPath>
     </Reference>

@@ -39,8 +39,8 @@ namespace Authorization
             var passwordCheck = new PasswordCheck.PasswordCheck();
             var password = InputPassword.Password;
 
-            passwordCheck.Error += ErrorLog;
-            passwordCheck.Success += SuccessLog;
+            passwordCheck.Error += (string message) => Log("error.log", "ERROR", message);
+            passwordCheck.Success += (string message) => Log("success.log", "SUCCESS", message);;
 
             passwordCheck.Error += MessageLabel_CheckLength_Error;
             passwordCheck.Success += MessageLabel_CheckLength_Success;
@@ -103,20 +103,10 @@ namespace Authorization
             LabelPasswordCheckAlphabet.Text = message;
         }
 
-        private void ErrorLog(string message)
-        {
-            Log("error.log", "ERROR", message);
-        }
-
-        private void SuccessLog(string message)
-        {
-            Log("success.log", "SUCCESS", message);
-        }
-        
         private void InputRepeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            string password = InputPassword.Password;
-            string passwordRepeat = InputRepeatPassword.Password;
+            var password = InputPassword.Password;
+            var passwordRepeat = InputRepeatPassword.Password;
 
             if (passwordRepeat == "")
             {
