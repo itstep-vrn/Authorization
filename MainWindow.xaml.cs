@@ -8,7 +8,6 @@ namespace Authorization
 {
     public partial class MainWindow : Window
     {
-        //TODO Значение переменных из БД
         private string login;
         private string password;
         private MySqlConnection connection;
@@ -45,10 +44,6 @@ namespace Authorization
                 {
                     checkAccount = true;
                     break;
-                }
-                else
-                {
-                    checkAccount = false;
                 }
             }
             if (checkAccount)
