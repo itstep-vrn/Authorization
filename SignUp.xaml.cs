@@ -11,7 +11,7 @@ namespace Authorization
         private MySqlConnection connection;
 
         private const string host = "mysql11.hostland.ru";
-        private const string database = "host1323541_suptest2";
+        private const string database = "host1323541_itstep4";
         private const string port = "3306";
         private const string username = "host1323541_itstep";
         private const string pass = "269f43dc";
@@ -31,8 +31,23 @@ namespace Authorization
         {
             var pass = InputPassword.Password;
             var login = InputLogin.Text;
+
+            const string sqlLogin = "SELECT login FROM Account";
+            using var commandLogin = new MySqlCommand { Connection = connection, CommandText = sqlLogin };
+            using var resultLogin = commandLogin.ExecuteReader();
+            while (resultLogin.Read())
+            {
+                var loginCheck = resultLogin.GetString(0);
+
+                if (login == loginCheck)
+                {
+                    MessageBox.Show("Логин уже занят.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+            }
+
             var sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
-            var command = new MySqlCommand {Connection = connection, CommandText = sql};
+            using var command = new MySqlCommand {Connection = connection, CommandText = sql};
             var result = command.ExecuteNonQuery();
             if (result == 0)
             {
