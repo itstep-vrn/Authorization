@@ -11,7 +11,7 @@ namespace Authorization
         private MySqlConnection connection;
 
         private const string host = "mysql11.hostland.ru";
-        private const string database = "host1323541_suptest2";
+        private const string database = "host1323541_itstep7";
         private const string port = "3306";
         private const string username = "host1323541_itstep";
         private const string pass = "269f43dc";
@@ -31,19 +31,34 @@ namespace Authorization
         {
             var pass = InputPassword.Password;
             var login = InputLogin.Text;
-            var sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
-            var command = new MySqlCommand {Connection = connection, CommandText = sql};
-            var result = command.ExecuteNonQuery();
-            if (result == 0)
+            var sql = $"select login from Account where login = '{login}'";
+
+            using (var command = new MySqlCommand { Connection = connection, CommandText = sql })
             {
-                MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                using (var result = command.ExecuteReader())
+                {
+                    if (result.Read())
+                    {
+                        MessageBox.Show("Регистрация не удалась, логин занят.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                }
             }
-            else
+
+            sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
+            using (var command = new MySqlCommand { Connection = connection, CommandText = sql })
             {
-                MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                var result = command.ExecuteNonQuery();
+                if (result == 0)
+                {
+                    MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
-
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
         {
             InputLogin.Clear();

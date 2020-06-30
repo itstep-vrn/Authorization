@@ -13,7 +13,7 @@ namespace Authorization
         private MySqlConnection connection;
 
         private const string host = "mysql11.hostland.ru";
-        private const string database = "host1323541_suptest2";
+        private const string database = "host1323541_itstep7";
         private const string port = "3306";
         private const string username = "host1323541_itstep";
         private const string pass = "269f43dc";
