@@ -23,7 +23,7 @@
             <Grid>
                 <Label Content="Регистрация" HorizontalAlignment="Center" Height="110" Margin="0,10,0,0" VerticalAlignment="Top" Width="420" FontSize="72" FontWeight="Normal" FontFamily="Segoe UI Light" Foreground="Black"/>
                 <TextBlock x:Name="LabelLogin" Text="Логин" HorizontalAlignment="Left" Margin="40,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
-                <TextBox x:Name="InputLogin" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" FontSize="18"/>
+                <TextBox x:Name="InputLogin" HorizontalAlignment="Center" Margin="0,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420" FontSize="18" TextChanged="InputLogin_TextChanged"/>
                 <TextBlock x:Name="LabelPassword" Text="Пароль" HorizontalAlignment="Left" Margin="40,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18"/>
                 <PasswordBox x:Name="InputPassword" PasswordChanged="InputPassword_PasswordChanged" HorizontalAlignment="Center" Margin="0,209,0,0" VerticalAlignment="Top" Width="420" FontSize="18"/>
                 <TextBlock x:Name="LabelPasswordCheckLength" HorizontalAlignment="Center" Margin="0,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="420"/>
@@ -35,6 +35,7 @@
                 <Button x:Name="ButtonClear" Content="Очистить" Click="ButtonClear_Click" HorizontalAlignment="Center" Margin="0,367,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130"/>
                 <Button x:Name="ButtonCancel" Content="Отмена" Click="ButtonCancel_Click" HorizontalAlignment="Left" Margin="330,367,0,0" VerticalAlignment="Top" FontSize="18" Background="{x:Null}" BorderBrush="Black" Width="130"/>
                 <TextBlock x:Name="LabelPasswordCheckRepeat" HorizontalAlignment="Left" Margin="250,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210"/>
+                <TextBlock x:Name="LoginCheck" HorizontalAlignment="Left" Margin="95,125,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="363"/>
             </Grid>
         </Border>
     </Grid>

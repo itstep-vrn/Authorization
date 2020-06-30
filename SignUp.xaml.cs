@@ -11,7 +11,7 @@ namespace Authorization
         private MySqlConnection connection;
 
         private const string host = "mysql11.hostland.ru";
-        private const string database = "host1323541_suptest2";
+        private const string database = "host1323541_itstep5";
         private const string port = "3306";
         private const string username = "host1323541_itstep";
         private const string pass = "269f43dc";
@@ -154,6 +154,26 @@ namespace Authorization
         private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void InputLogin_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            string login;
+            var checkAccount = true;
+            const string sql = "SELECT login FROM Account";
+            var command = new MySqlCommand { Connection = connection, CommandText = sql };
+            using var result = command.ExecuteReader();
+            while (result.Read() && checkAccount)
+            {
+                login = result.GetString(0);
+                if (InputLogin.Text == login)
+                {
+                    LoginCheck.Text = "Это имя аккаунта уже занято";
+                    checkAccount = false;
+                    break;
+                }
+                LoginCheck.Text = "Имя аккаунта свободно";
+            }
         }
     }
 }
