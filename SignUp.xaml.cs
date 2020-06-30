@@ -34,11 +34,13 @@ namespace Authorization
             var sql = $"SELECT login FROM Account WHERE login = '{login}'";
             using (var command = new MySqlCommand { Connection = connection, CommandText = sql })
             {
-                using var result = command.ExecuteReader();
-                if (result.Read())
+                using (var result = command.ExecuteReader())
                 {
-                    MessageBox.Show("Регистрация не удалась. Логин уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
+                    if (result.Read())
+                    {
+                        MessageBox.Show("Регистрация не удалась. Логин уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
                 }
             }
             sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
