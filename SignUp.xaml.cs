@@ -31,16 +31,30 @@ namespace Authorization
         {
             var pass = InputPassword.Password;
             var login = InputLogin.Text;
-            var sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
-            var command = new MySqlCommand {Connection = connection, CommandText = sql};
-            var result = command.ExecuteNonQuery();
-            if (result == 0)
+            var sql = $"SELECT login FROM Account WHERE login = '{login}'";
+            using (var command = new MySqlCommand { Connection = connection, CommandText = sql })
             {
-                MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                using (var result = command.ExecuteReader())
+                {
+                    if (result.Read())
+                    {
+                        MessageBox.Show("Регистрация не удалась. Логин уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                }
             }
-            else
+            sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
+            using (var command2 = new MySqlCommand { Connection = connection, CommandText = sql })
             {
-                MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                var result2 = command2.ExecuteNonQuery();
+                if (result2 == 0)
+                {
+                    MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
         }
 
