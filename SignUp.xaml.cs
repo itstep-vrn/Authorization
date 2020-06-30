@@ -1,22 +1,47 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using MySql.Data.MySqlClient;
 using static Logging.LogToFile;
 
 namespace Authorization
 {
     public partial class SignUp : Window
     {
+        private MySqlConnection connection;
+
+        private const string host = "mysql11.hostland.ru";
+        private const string database = "host1323541_suptest2";
+        private const string port = "3306";
+        private const string username = "host1323541_itstep";
+        private const string pass = "269f43dc";
+        private const string ConnString = "Server=" + host + ";Database=" + database + ";port=" + port + ";User Id=" + username + ";password=" + pass;
+        
         public SignUp()
         {
             InitializeComponent();
             Loaded += (sender, args) => Log("info.log", "INFO", "Окно регистрации загружено");
             Closed += (sender, args) => Log("info.log", "INFO", "Окно регистрации закрылось");
+            
+            connection = new MySqlConnection(ConnString);
+            connection.Open();
         }
 
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Connect to DB
+            var pass = InputPassword.Password;
+            var login = InputLogin.Text;
+            var sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
+            var command = new MySqlCommand {Connection = connection, CommandText = sql};
+            var result = command.ExecuteNonQuery();
+            if (result == 0)
+            {
+                MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
