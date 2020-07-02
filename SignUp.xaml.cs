@@ -1,61 +1,45 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using MySql.Data.MySqlClient;
 using static Logging.LogToFile;
 
 namespace Authorization
 {
     public partial class SignUp : Window
     {
-        private MySqlConnection connection;
-
-        private const string host = "mysql11.hostland.ru";
-        private const string database = "host1323541_suptest2";
-        private const string port = "3306";
-        private const string username = "host1323541_itstep";
-        private const string pass = "269f43dc";
-        private const string ConnString = "Server=" + host + ";Database=" + database + ";port=" + port + ";User Id=" + username + ";password=" + pass;
-        
         public SignUp()
         {
             InitializeComponent();
             Loaded += (sender, args) => Log("info.log", "INFO", "Окно регистрации загружено");
             Closed += (sender, args) => Log("info.log", "INFO", "Окно регистрации закрылось");
-            
-            connection = new MySqlConnection(ConnString);
-            connection.Open();
         }
 
         private void ButtonSignUp_Click(object sender, RoutedEventArgs e)
         {
             var pass = InputPassword.Password;
             var login = InputLogin.Text;
+            
+            var db = new DBConnection();
+            
             var sql = $"SELECT login FROM Account WHERE login = '{login}'";
-            using (var command = new MySqlCommand { Connection = connection, CommandText = sql })
+            var result = db.SelectQuery(sql);
+            if (result.Read())
             {
-                using (var result = command.ExecuteReader())
-                {
-                    if (result.Read())
-                    {
-                        MessageBox.Show("Регистрация не удалась. Логин уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        return;
-                    }
-                }
+                MessageBox.Show("Регистрация не удалась. Логин уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+            
             sql = $"INSERT INTO Account (login, pass) VALUES ('{login}', '{pass}')";
-            using (var command2 = new MySqlCommand { Connection = connection, CommandText = sql })
+            var result2 = db.InsertQuery(sql);
+            if (result2 == 0)
             {
-                var result2 = command2.ExecuteNonQuery();
-                if (result2 == 0)
-                {
-                    MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-                else
-                {
-                    MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                MessageBox.Show("Регистрация не удалась.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+            else
+            {
+                MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            db.Close();
         }
 
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
