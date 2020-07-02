@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Logging;
+using MySql.Data.MySqlClient;
 using static Logging.LogToFile;
 
 namespace Authorization
@@ -18,12 +19,14 @@ namespace Authorization
         {
             connection = new MySqlConnection(ConnString);
             connection.Open();
+            Log("db.log", "SUCCESS", $"Подключение к {database} на {host} пользователем {username} прошло успешно");
         }
 
         public MySqlDataReader SelectQuery(string sql)
         {
             var command = new MySqlCommand {Connection = connection, CommandText = sql};
             var result = command.ExecuteReader();
+            Log("db.log", "SUCCESS", $"Запрос {sql} выполнен");
             return result;
         }
 
@@ -31,12 +34,14 @@ namespace Authorization
         {
             var command = new MySqlCommand {Connection = connection, CommandText = sql};
             var result = command.ExecuteNonQuery();
+            Log("db.log", "SUCCESS", $"Запрос {sql} выполнен");
             return result;
         }
 
         public void Close()
         {
             connection.Close();
+            Log("db.log", "SUCCESS", $"Подключение к {database} на {host} пользователем {username} закрыто");
         }
     }
 }
