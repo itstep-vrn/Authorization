@@ -57,5 +57,25 @@ namespace Authorization
         {
 
         }
+
+        private void infoProfile_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void settingsProfile_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void favorite_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void notification_button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

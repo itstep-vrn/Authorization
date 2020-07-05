@@ -47,8 +47,18 @@
         <Rectangle Grid.Row="2"
                    Grid.Column="2"
                    Fill="#eeeeee" />
-
-        <!--Search-->
+        
+        <!--Side Panel-->
+        <DockPanel Grid.Row="0" Grid.Column="0">
+            <Button x:Name="infoProfile_button" Click="infoProfile_button_Click" Background="#33cc66" Margin="1,1,0,0" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{x:Null}"></Button>
+        </DockPanel>
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <Button x:Name="settingsProfile_button" Click="settingsProfile_button_Click"  Background="#33cc66" Margin="1,1,0,0" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" BorderBrush="{x:Null}"></Button>
+            <Button x:Name="favorite_button" Click="favorite_button_Click"  Background="#33cc66" Margin="1,1,0,0" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" BorderBrush="{x:Null}"></Button>
+            <Button x:Name="notification_button" Click="notification_button_Click"  Background="#33cc66" Margin="1,1,0,0" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="40" BorderBrush="{x:Null}"></Button>
+        </DockPanel>
+        
+            <!--Search-->
         <DockPanel Grid.Row="0" Grid.Column="1">
             <TextBox x:Name="search_textbox" Text="Searching" Background="#eeeeee" GotFocus="search_textbox_GotFocus" LostFocus="search_textbox_LostFocus" FontSize="22" FontFamily="Corbel"></TextBox>
         </DockPanel>
